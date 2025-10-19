@@ -1,35 +1,23 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Stack } from "expo-router";
+import React from "react";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
+    // Tabs 컴포넌트 대신 Stack 컴포넌트를 사용합니다.
+    <Stack>
+      {/* 
+        Stack.Screen을 사용하여 'index' 화면만 단독으로 렌더링합니다.
+        options={{ headerShown: false }}를 통해 상단 헤더(제목 표시줄)를 숨깁니다.
+      */}
+      <Stack.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          headerShown: false,
         }}
       />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
+      {/* 
+        'explore' 화면에 대한 정의를 제거했으므로 더 이상 나타나지 않습니다.
+      */}
+    </Stack>
   );
 }
